@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
+using LoginApp.Servicios;
+using LoginApp.Clases;
 
 namespace LoginApp
 {
@@ -16,6 +14,25 @@ namespace LoginApp
         public MainPage()
         {
             InitializeComponent();
+            labelErrors.IsVisible = false;
         }
+       
+
+        private async void btnLogin_Clicked(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtUsername.Text) && !string.IsNullOrEmpty(txtPassword.Text))
+            {
+                System.Diagnostics.Debug.WriteLine("Hello");
+                var user = new User(txtUsername.Text, txtPassword.Text);
+                Session login = await ServicioUser.Login(user);
+                if (login != null)
+                {
+                    this.BindingContext = login;
+                    labelErrors.IsVisible = login.errors != null;
+                }
+            }
+        }
+
+
     }
 }

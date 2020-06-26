@@ -14,21 +14,22 @@ namespace LoginApp.Servicios
         public static async Task<Session> Login(User user)
         {
             var url = $"https://node-auth-xamarin.herokuapp.com/api/auth/signin";
-            using (var cliente  = new HttpClient())
+            using (var cliente = new HttpClient())
             {
                 var peticion = await cliente.PostAsync(url, new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json"));
                 if (peticion != null)
                 {
                     var json = peticion.Content.ReadAsStringAsync().Result;
                     var datos = (JContainer)JsonConvert.DeserializeObject(json);
-                    if (datos["message"]!=null)
+                    if (datos["message"] != null)
                     {
                         string message = (string)datos["message"];
                         Session session = new Session();
                         session.isActive = false;
                         session.errors = message;
                         return session;
-                    }else if (datos["accessToken"] != null)
+                    }
+                    else if (datos["accessToken"] != null)
                     {
                         string message = (string)datos["accessToken"];
                         Session session = new Session();
@@ -38,6 +39,30 @@ namespace LoginApp.Servicios
                         return session;
                     }
                 }
+            }
+            return default;
+        }
+
+        public static async Task<String> NewUser(NuevoUsuario nuevo)
+        {
+            var url = $"https://node-auth-xamarin.herokuapp.com/api/auth/signup";
+            using (var cliente = new HttpClient())
+            {
+                 
+                var peticion = await cliente.PostAsync(url, new StringContent(JsonConvert.SerializeObject(nuevo), Encoding.UTF8, "application/json"));
+                if (peticion != null)
+                {
+                    var json = peticion.Content.ReadAsStringAsync().Result;
+                    var datos = (JContainer)JsonConvert.DeserializeObject(json);
+                    System.Diagnostics.Debug.WriteLine(datos);
+                    if (datos["message"] != null)
+                    {
+                        string message = (string)datos["message"];
+                        return message;
+                    }
+                }
+
+
             }
             return default;
         }

@@ -4,18 +4,18 @@ using System.Text;
 
 namespace LoginApp.Clases
 {
-    public class NewUser
+    public class NuevoUsuario
     {
-        public string Name { get; set; }
-        public string Password { get; set; }
-        public string Email { get; set; }
-        public string[] Role { get; set; }
-        public NewUser(string Name, string Password, string Email, string[] Role)
+        public string username { get; set; }
+        public string password { get; set; }
+        public string email { get; set; }
+        public string[] roles { get; set; }
+        public NuevoUsuario(string Name, string Password, string Email)
         {
-            this.Name = Name;
-            this.Password = Password;
-            this.Email = Email;
-            this.Role = Role;
+            this.username = Name;
+            this.password = Password;
+            this.email = Email;
+            this.roles = new string[] { "admin", "user"};
         }
     }
 }

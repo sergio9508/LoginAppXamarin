@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="LoginApp.MainPage">
+             x:Class="LoginApp.NewUser">
     <ContentPage.Content>
         <Grid Margin="16">
             <Grid.RowDefinitions>
@@ -13,19 +13,18 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <StackLayout Grid.Row="0">
-                <Label Text="Please enter your credentials" />
+                <Label Text="Crea una nueva cuenta" />
                 <Entry x:Name="txtUsername"
                        Placeholder="Username" />
                 <Entry x:Name="txtPassword"
                        Placeholder="Password"
                        IsPassword="True" />
-                <Label Text="Invalid credentials entered" 
-                       x:Name="labelErrors"
-                       TextColor="Red" />
+                <Entry x:Name="txtEmail"
+                       Placeholder="Email"/>
+                
             </StackLayout>
             <StackLayout Grid.Row="2">
-                <Button Text="Iniciar Sesion" x:Name="btnLogin" Clicked="btnLogin_Clicked"/>
-                <Button Text="Crear una cuenta" x:Name="btnNew" Clicked="btnNew_Clicked"/>
+                <Button Text="Crear cuenta" x:Name="btnNuevo" Clicked="btnNuevo_Clicked"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>
